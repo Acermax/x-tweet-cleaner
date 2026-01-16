@@ -1,0 +1,88 @@
+/* X Tweet Cleaner - Content Script Styles */
+
+/* Visual indicator when extension is active */
+.x-tweet-cleaner-active {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 999999;
+  background: linear-gradient(135deg, #1d9bf0, #0d8de0);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(29, 155, 240, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: slideIn 0.3s ease;
+}
+
+.x-tweet-cleaner-active::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #00ba7c;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+.x-tweet-cleaner-paused {
+  background: linear-gradient(135deg, #ffad1f, #f0a000);
+}
+
+.x-tweet-cleaner-paused::before {
+  background: white;
+  animation: none;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+}
+
+/* Highlight tweets being processed */
+.x-tweet-cleaner-processing {
+  outline: 2px solid #1d9bf0 !important;
+  outline-offset: 2px;
+  background-color: rgba(29, 155, 240, 0.05) !important;
+}
+
+/* Highlight tweets about to be deleted */
+.x-tweet-cleaner-deleting {
+  outline: 2px solid #f4212e !important;
+  outline-offset: 2px;
+  background-color: rgba(244, 33, 46, 0.05) !important;
+  animation: fadeDelete 0.5s ease;
+}
+
+@keyframes fadeDelete {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}

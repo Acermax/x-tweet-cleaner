@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X Tweet Cleaner</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" class="logo-icon">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+        <h1>Tweet Cleaner</h1>
+      </div>
+      <div class="status-indicator" id="statusIndicator">
+        <span class="status-dot"></span>
+        <span class="status-text">Inactivo</span>
+      </div>
+    </header>
+
+    <!-- Warning -->
+    <div class="warning-banner" id="warningBanner">
+      <svg viewBox="0 0 24 24" class="warning-icon">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-4V7h2v6h-2z"/>
+      </svg>
+      <span>Abre tu perfil en X.com para comenzar</span>
+    </div>
+
+    <!-- Filters Section -->
+    <section class="section filters-section">
+      <h2 class="section-title">
+        <svg viewBox="0 0 24 24" class="section-icon">
+          <path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+        </svg>
+        Filtros
+      </h2>
+      
+      <!-- Content Type -->
+      <div class="filter-group">
+        <label class="filter-label">Tipo de contenido</label>
+        <div class="toggle-group">
+          <button class="toggle-btn active" data-type="all" id="filterAll">
+            <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            Todo
+          </button>
+          <button class="toggle-btn" data-type="tweets" id="filterTweets">
+            <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            Tweets
+          </button>
+          <button class="toggle-btn" data-type="replies" id="filterReplies">
+            <svg viewBox="0 0 24 24"><path d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            Respuestas
+          </button>
+        </div>
+      </div>
+
+      <!-- Date Range -->
+      <div class="filter-group">
+        <label class="filter-label">Rango de fechas</label>
+        <div class="date-inputs">
+          <div class="date-input-wrapper">
+            <label class="date-label">Desde</label>
+            <input type="date" id="dateFrom" class="date-input">
+          </div>
+          <div class="date-input-wrapper">
+            <label class="date-label">Hasta</label>
+            <input type="date" id="dateTo" class="date-input">
+          </div>
+        </div>
+      </div>
+
+      <!-- Keyword Filter -->
+      <div class="filter-group">
+        <label class="filter-label">Filtrar por texto (opcional)</label>
+        <input type="text" id="keywordFilter" class="text-input" placeholder="Ej: palabra, frase...">
+        <span class="input-hint">Solo eliminará tweets que contengan este texto</span>
+      </div>
+    </section>
+
+    <!-- Speed Section -->
+    <section class="section speed-section">
+      <h2 class="section-title">
+        <svg viewBox="0 0 24 24" class="section-icon">
+          <path d="M13 10V3L4 14h7v7l9-11h-7z" fill="currentColor"/>
+        </svg>
+        Velocidad
+      </h2>
+      <div class="speed-slider-container">
+        <input type="range" id="speedSlider" min="1" max="5" value="2" class="speed-slider">
+        <div class="speed-labels">
+          <span>Lento</span>
+          <span>Seguro</span>
+          <span>Normal</span>
+          <span>Rápido</span>
+          <span>Máximo</span>
+        </div>
+      </div>
+      <div class="speed-info">
+        <span id="speedDescription">~3-5 segundos entre cada tweet</span>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section stats-section">
+      <h2 class="section-title">
+        <svg viewBox="0 0 24 24" class="section-icon">
+          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke="currentColor" stroke-width="2" fill="none"/>
+        </svg>
+        Estadísticas
+      </h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-value" id="deletedCount">0</span>
+          <span class="stat-label">Eliminados</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="skippedCount">0</span>
+          <span class="stat-label">Omitidos</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="errorCount">0</span>
+          <span class="stat-label">Errores</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Action Buttons -->
+    <div class="actions">
+      <button class="btn btn-primary" id="startBtn">
+        <svg viewBox="0 0 24 24" class="btn-icon">
+          <path d="M5 3l14 9-14 9V3z" fill="currentColor"/>
+        </svg>
+        Iniciar limpieza
+      </button>
+      <button class="btn btn-secondary hidden" id="pauseBtn">
+        <svg viewBox="0 0 24 24" class="btn-icon">
+          <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" fill="currentColor"/>
+        </svg>
+        Pausar
+      </button>
+      <button class="btn btn-danger hidden" id="stopBtn">
+        <svg viewBox="0 0 24 24" class="btn-icon">
+          <path d="M6 6h12v12H6z" fill="currentColor"/>
+        </svg>
+        Detener
+      </button>
+    </div>
+
+    <!-- Log Section -->
+    <section class="section log-section">
+      <div class="log-header">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" class="section-icon">
+            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+          Registro
+        </h2>
+        <button class="clear-log-btn" id="clearLogBtn">Limpiar</button>
+      </div>
+      <div class="log-container" id="logContainer">
+        <div class="log-entry log-info">Esperando para iniciar...</div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>X Tweet Cleaner v1.0</span>
+      <span class="separator">•</span>
+      <span>Usa con responsabilidad</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

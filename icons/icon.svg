@@ -1,0 +1,15 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="#1d9bf0"/>
+  
+  <!-- X logo -->
+  <path d="M81.5 35h11.7L68.7 63.5l29 38.5H74.3L56.5 78.8 36.2 102H24.5l26.2-30-27.8-37h24.4l16.1 21.3L81.5 35zm-4.1 62h6.5L50.8 41.7h-7L77.4 97z" fill="white"/>
+  
+  <!-- Broom/cleaner icon overlay -->
+  <g transform="translate(75, 75)">
+    <circle cx="20" cy="20" r="22" fill="#0a0a0a" opacity="0.9"/>
+    <path d="M12 28l4-16h8l4 16H12z" fill="#f5f5f5"/>
+    <rect x="17" y="8" width="6" height="8" rx="1" fill="#f5f5f5"/>
+    <path d="M14 28v4h12v-4" stroke="#f5f5f5" stroke-width="2" fill="none"/>
+  </g>
+</svg>
