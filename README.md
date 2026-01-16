@@ -231,4 +231,8 @@ const SELECTORS = {
 
 <p align="center">
   <sub>¿Te fue útil? ¡Dale una ⭐ al repo!</sub>
+  <br>
+  <sub>☕ <a href="https://ko-fi.com/acermax">Si te apetece, puedes invitarme a un café</a></sub>
 </p>
+
+
